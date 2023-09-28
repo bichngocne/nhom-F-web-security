@@ -1,4 +1,10 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+
+header('Access-Control-Allow-Methods: GET, POST');
+
+header("Access-Control-Allow-Headers: *");
+
 //file_put_contents('cookie.txt',$_GET['cookie']);
 $number = $_GET['session_id'];
 // Kiểm tra xem 'session_id' có giá trị không

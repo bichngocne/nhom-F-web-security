@@ -49,15 +49,38 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        $sql = 'UPDATE users SET 
-                 name = "' . mysqli_real_escape_string(self::$_connection, htmlentities($input['name'])) .'", 
-                 password="'. md5(htmlentities($input['password'])) .'"
-                WHERE id = ' . $input['id'];
-
-        $user = $this->update($sql);
-
-        return $user;
+        // Lấy phiên bản hiện tại của người dùng
+        $currentVersion = $this->getCurrentVersion($input['id']);
+    
+        // Kiểm tra xem phiên bản trong dữ liệu người dùng và phiên bản trong yêu cầu người dùng có trùng khớp hay không
+        if ($input['version'] === $currentVersion) {
+            // Phiên bản trùng khớp, tiếp tục cập nhật
+            $sql = 'UPDATE users SET 
+                     name = "' . mysqli_real_escape_string(self::$_connection, htmlentities($input['name'])) .'", 
+                     password="'. md5(htmlentities($input['password'])) .'",
+                     version = version + 1
+                    WHERE id = ' . $input['id'];
+    
+            $user = $this->update($sql);
+    
+            return $user;
+        } else {
+            // Phiên bản không trùng khớp, trả về thông báo hoặc xử lý theo ý của bạn
+            return false;
+        }
     }
+    
+    // Hàm lấy phiên bản của người dùng dựa trên ID
+    function getCurrentVersion($userId) {
+    
+        // Truy vấn cơ sở dữ liệu để lấy phiên bản
+        $sql = "SELECT version FROM users WHERE id = ".$userId;
+        $result = $this->select($sql);
+        // Kiểm tra xem truy vấn đã thành công hay không
+        return $result[0]['version'];
+    }
+    
+
 
     /**
      * Insert user

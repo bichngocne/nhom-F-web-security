@@ -15,12 +15,25 @@ if (!empty($_GET['id'])) {
 
 if (!empty($_POST['submit'])) {
 
+    // Lấy phiên bản hiện tại của dữ liệu từ cơ sở dữ liệu
+    $currentVersion = $userModel->getCurrentVersion($_id);
+    echo $currentVersion;
     if (!empty($_id)) {
-        $userModel->updateUser($_POST);
+    // Kiểm tra phiên bản của người dùng với phiên bản hiện tại
+        if ($_POST['version'] === $currentVersion) {
+        //     // Phiên bản trùng khớp, có thể cập nhật dữ liệu
+            $userModel->updateUser($_POST);
+            header('location: list_users.php');
+
+        } else {
+            // Phiên bản khác nhau, dữ liệu đã bị thay đổi bởi người khác
+            // Hiển thị thông báo cho người dùng và cho họ quyết định tiếp theo
+            echo '<script>alert("Dữ liệu đã bị thay đổi bởi người khác. Vui lòng thử lại?");</script>';
+        }
+   
     } else {
         $userModel->insertUser($_POST);
     }
-    header('location: list_users.php');
 }
 
 ?>
@@ -47,6 +60,8 @@ if (!empty($_POST['submit'])) {
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
+                            <!-- Trường ẩn để lưu phiên bản của dữ liệu -->
+                        <input type="hidden" name="version" value="<?php echo $user[0]['version'] ?>">
                     </div>
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>

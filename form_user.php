@@ -17,7 +17,6 @@ if (!empty($_POST['submit'])) {
 
     // Lấy phiên bản hiện tại của dữ liệu từ cơ sở dữ liệu
     $currentVersion = $userModel->getCurrentVersion($_id);
-    echo $currentVersion;
     if (!empty($_id)) {
     // Kiểm tra phiên bản của người dùng với phiên bản hiện tại
         if ($_POST['version'] === $currentVersion) {

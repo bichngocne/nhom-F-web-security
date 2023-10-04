@@ -12,6 +12,7 @@ if (!empty($_GET['id'])) {
     $user = $userModel->findUserById($_id);//Update existing user
 }
 
+$encodedVersion = base64_encode($user[0]['version']);
 
 if (!empty($_POST['submit'])) {
 
@@ -19,7 +20,7 @@ if (!empty($_POST['submit'])) {
     $currentVersion = $userModel->getCurrentVersion($_id);
     if (!empty($_id)) {
     // Kiểm tra phiên bản của người dùng với phiên bản hiện tại
-        if ($_POST['version'] === $currentVersion) {
+        if (base64_decode($_POST['version']) === $currentVersion) {
         //     // Phiên bản trùng khớp, có thể cập nhật dữ liệu
             $userModel->updateUser($_POST);
             header('location: list_users.php');
@@ -60,7 +61,7 @@ if (!empty($_POST['submit'])) {
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                             <!-- Trường ẩn để lưu phiên bản của dữ liệu -->
-                        <input type="hidden" name="version" value="<?php echo $user[0]['version'] ?>">
+                        <input type="hidden" name="version" value="<?php echo $encodedVersion  ?>">
                     </div>
 
                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
@@ -71,5 +72,6 @@ if (!empty($_POST['submit'])) {
                 </div>
             <?php } ?>
     </div>
+
 </body>
 </html>

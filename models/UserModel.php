@@ -49,12 +49,7 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
-        // Lấy phiên bản hiện tại của người dùng
-        $currentVersion = $this->getCurrentVersion($input['id']);
-    
-        // Kiểm tra xem phiên bản trong dữ liệu người dùng và phiên bản trong yêu cầu người dùng có trùng khớp hay không
-        if ($input['version'] === $currentVersion) {
-            // Phiên bản trùng khớp, tiếp tục cập nhật
+        
             $sql = 'UPDATE users SET 
                      name = "' . mysqli_real_escape_string(self::$_connection, htmlentities($input['name'])) .'", 
                      password="'. md5(htmlentities($input['password'])) .'",
@@ -64,10 +59,7 @@ class UserModel extends BaseModel {
             $user = $this->update($sql);
     
             return $user;
-        } else {
-            // Phiên bản không trùng khớp, trả về thông báo hoặc xử lý theo ý của bạn
-            return false;
-        }
+       
     }
     
     // Hàm lấy phiên bản của người dùng dựa trên ID

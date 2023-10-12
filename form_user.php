@@ -8,7 +8,8 @@ $user = NULL; //Add new user
 $_id = NULL;
 
 if (!empty($_GET['id'])) {
-    $_id = $_GET['id'];
+    $encoded_id = $_GET['id'];
+    $_id = base64_decode(urldecode($encoded_id));
     $user = $userModel->findUserById($_id);//Update existing user
 }
 
@@ -39,7 +40,7 @@ if (!empty($_POST['submit'])) {
                     User form
                 </div>
                 <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo $_id ?>">
+                    <input type="hidden" name="id" value="<?php echo base64_encode($_id); ?>">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control" name="name" placeholder="Name" value='<?php if (!empty($user[0]['name'])) echo $user[0]['name'] ?>'>

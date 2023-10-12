@@ -52,10 +52,11 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['type']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo $user['id'] ?>">
+                                <?php  $encoded_id = base64_encode($user['id']); ?>
+                                <a href="form_user.php?id=<?php echo urlencode($encoded_id); ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo $user['id'] ?>">
+                                <a href="view_user.php?id=<?php echo urlencode($encoded_id); ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
                                 <a href="delete_user.php?id=<?php echo $user['id'] ?>">

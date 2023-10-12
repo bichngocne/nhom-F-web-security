@@ -49,10 +49,12 @@ class UserModel extends BaseModel {
      * @return mixed
      */
     public function updateUser($input) {
+        $encode_id= $input['id'];
+        $id = base64_decode(urldecode($encode_id));
         $sql = 'UPDATE users SET 
                  name = "' . mysqli_real_escape_string(self::$_connection, $input['name']) .'", 
                  password="'. md5($input['password']) .'"
-                WHERE id = ' . $input['id'];
+                WHERE id = ' .$id;
 
         $user = $this->update($sql);
 

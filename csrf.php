@@ -16,7 +16,7 @@ if(!empty($_GET['id']))
 </head>
 
 <body>
-    <form method="post" action="delete_user.php" style="display: grid;justify-items: center;">
+    <form method="post" action="" style="display: grid;justify-items: center;">
 
         <!-- Hình ảnh nhấp vào -->
         <div><img src="../nhom-F-web-security/public/images/hacker.jpg" alt="Hacker Image" style="max-width: 300px; max-height: 200px;"></div>

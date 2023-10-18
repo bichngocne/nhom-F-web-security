@@ -59,14 +59,14 @@ $users = $userModel->getUsers($params);
                                 <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <form id="deleteUserForm<?php echo $user['id']; ?>" action="delete_user.php" method="post" style="display: none;">
-                                    <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
-                                    <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
-                                </form>
+                                    <form id="deleteUserForm<?php echo $user['id']; ?>" action="delete_user.php" method="post" style="display: none;">
+                                        <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
+                                        <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+                                    </form>
 
-                                <a href="#" onclick="if (confirm('Bạn có chắc chắn muốn xóa người dùng này?')) { document.getElementById('deleteUserForm<?php echo $user['id']; ?>').submit(); }">
-                                    <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
-                                </a>
+                                    <a href="" onclick="if (confirm('Bạn có chắc chắn muốn xóa người dùng này?')) { document.getElementById('deleteUserForm<?php echo $user['id']; ?>').submit(); }">
+                                        <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
+                                    </a>
                             </td>
                         </tr>
                     <?php } ?>

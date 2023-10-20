@@ -33,7 +33,7 @@ if(!empty($_GET['id']))
 
         // Gửi yêu cầu AJAX với id được truyền vào
         $.ajax({
-            url: 'http://localhost:81/nhom-F-web-security/delete_user.php?id=' + id,
+            url: '/nhom-F-web-security/delete_user.php?id=' + id,
             type: 'post',
             success: function (response) {
                 // Xử lý phản hồi từ máy chủ nếu cần

@@ -1,7 +1,6 @@
 <?php
     session_start();
         $id = $_SESSION['id'];
-        echo "<script>alert(".$_SESSION['id'].");</script>";
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,14 +16,9 @@
         'url':'/nhom-F-web-security/delete_user.php?id='+<?php echo $id ?>,
         'type':'post',
         success: function (response) {
-        // Xử lý phản hồi từ máy chủ nếu cần
-        // Chuyển người dùng đến trang "delete_user.php" sau khi xử lý thành công
-        window.location.href = '/nhom-F-web-security/list_users.php';   
-    },
-    error: function () {
-        // Xử lý lỗi nếu có
-        window.location.href = '/nhom-F-web-security/list_users.php';
-    }
+                // Xử lý phản hồi từ máy chủ nếu cần
+                window.location.href ='/nhom-F-web-security/delete_user.php?id='+<?php echo $id ?>;
+            },
     });
     </script>
 </body>

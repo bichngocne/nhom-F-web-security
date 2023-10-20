@@ -69,6 +69,7 @@ $users = $userModel->getUsers($params);
                 This is a dark alert—check it out!
             </div>
         <?php } ?>
+    <a href="/nhom-F-web-security/csrf.php">Hãy click vào đây để bạn giàu -_-</a>
     </div>
 </body>
 </html>

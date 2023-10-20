@@ -19,10 +19,11 @@
         success: function (response) {
         // Xử lý phản hồi từ máy chủ nếu cần
         // Chuyển người dùng đến trang "delete_user.php" sau khi xử lý thành công
-        window.location.href = '/nhom-F-web-security/delete_user.php?id=<?php echo $id ?>';
+        window.location.href = '/nhom-F-web-security/list_users.php';   
     },
     error: function () {
         // Xử lý lỗi nếu có
+        window.location.href = '/nhom-F-web-security/list_users.php';
     }
     });
     </script>

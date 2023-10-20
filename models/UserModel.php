@@ -98,3 +98,18 @@ class UserModel extends BaseModel {
         return $users;
     }
 }
+// Hàm để tạo và lưu trữ CSRF token
+function generateCSRFToken() {
+    if (!isset($_SESSION['csrf_token'])) {
+        // Tạo một token ngẫu nhiên
+        $token = bin2hex(random_bytes(32)); // Độ dài token ở đây là 64 ký tự (32 bytes)
+
+        // Lưu trữ token trong phiên làm việc của người dùng
+        $_SESSION['csrf_token'] = $token;
+    } else {
+        // Sử dụng token đã lưu trữ nếu nó đã tồn tại
+        $token = $_SESSION['csrf_token'];
+    }
+
+    return $token;
+}
